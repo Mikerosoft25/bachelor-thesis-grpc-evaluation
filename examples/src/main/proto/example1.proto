@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.exxeta.protos.example1";
+option java_outer_classname = "Example1Protos";
+
+message User {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package exxeta.randomdataservice;
+
+option java_multiple_files = true;
+option java_package = "com.exxeta.randomdataservice";
+option java_outer_classname = "RandomDataServiceProto";
+
+service RandomDataService {
+  rpc GetRandomData (GetRandomDataRequest) returns (RandomDataGrpcDto);
+}
+
+message GetRandomDataRequest {
+  int32 byte_count = 1;
+}
+
+message RandomDataGrpcDto {
+  string data = 1;
+}

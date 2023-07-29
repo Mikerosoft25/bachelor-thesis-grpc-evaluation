@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "user.proto";
+
+option java_multiple_files = true;
+option java_package = "com.exxeta.shopservice";
+option java_outer_classname = "ShopServiceProto";
+
+service OrderService {
+  rpc CreateOrder (CreateOrderRequest) returns (OrderGrpcDto);
+
+  rpc ListOrders (google.protobuf.Empty) returns (OrderListGrpcDto);
+
+  rpc GetOrder (GetOrderRequest) returns (OrderGrpcDto);
+
+  rpc UpdateOrder (UpdateOrderRequest) returns (OrderGrpcDto);
+
+  rpc DeleteOrder (DeleteOrderRequest) returns (OrderGrpcDto);
+}
+
+service ProductService {
+  rpc CreateProduct (CreateProductRequest) returns (ProductGrpcDto);
+
+  rpc ListProducts (google.protobuf.Empty) returns (ProductListGrpcDto);
+
+  rpc GetProduct (GetProductRequest) returns (ProductGrpcDto);
+
+  rpc UpdateProduct (UpdateProductRequest) returns (ProductGrpcDto);
+
+  rpc DeleteProduct (DeleteProductRequest) returns (ProductGrpcDto);
+
+  rpc ListRecommendedProducts (ListRecommendedProductsRequest) returns (ProductRecommendationGrpcDto);
+}
+
+message CreateProductRequest {
+  string name = 1;
+  string category = 2;
+  float price = 3;
+}
+
+message UpdateProductRequest {
+  int32 product_id = 1;
+  optional string name = 2;
+  optional string category = 3;
+  optional float price = 4;
+}
+
+message DeleteProductRequest {
+  int32 product_id = 1;
+}
+
+message ProductGrpcDto {
+  int32 id = 1;
+  string name = 2;
+  string category = 3;
+  float price = 4;
+}
+
+message ProductListGrpcDto {
+  repeated ProductGrpcDto products = 1;
+}
+
+message ProductList {
+  repeated ProductGrpcDto products = 1;
+}
+
+message ListRecommendedProductsRequest {
+  int32 user_id = 1;
+}
+
+message ProductRecommendationGrpcDto {
+  exxeta.userservice.UserGrpcDto user = 1;
+  repeated ProductGrpcDto recommended_products = 2;
+}
+
+message GetProductRequest {
+  int32 product_id = 1;
+}
+
+message OrderGrpcDto {
+  int32 id = 1;
+  string iso_timestamp = 2;
+  float total_price = 3;
+  ProductList products = 4;
+  exxeta.userservice.UserGrpcDto user = 5;
+}
+
+message OrderListGrpcDto {
+  repeated OrderGrpcDto orders = 1;
+}
+
+message GetOrderRequest {
+  int32 order_id = 1;
+}
+
+message CreateOrderRequest {
+  int32 user_id = 1;
+  repeated int32 product_ids = 2;
+}
+
+message UpdateOrderRequest {
+  int32 order_id = 1;
+  repeated int32 product_ids = 2;
+}
+
+message DeleteOrderRequest {
+  int32 order_id = 1;
+}

@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package exxeta.userservice;
+
+option java_multiple_files = true;
+option java_package = "com.exxeta.userservice";
+option java_outer_classname = "UserServiceProto";
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (UserGrpcDto);
+
+  rpc ListUsers (ListUsersRequest) returns (UserListGrpcDto);
+
+  rpc GetUser (GetUserRequest) returns (UserGrpcDto);
+
+  rpc UpdateUser (UpdateUserRequest) returns (UserGrpcDto);
+
+  rpc DeleteUser (DeleteUserRequest) returns (UserGrpcDto);
+}
+
+message UserGrpcDto {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string post_code = 4;
+  string city = 5;
+  string address = 6;
+  int32 age = 7;
+  bool deleted = 8;
+}
+
+message UserListGrpcDto {
+  repeated UserGrpcDto users = 1;
+}
+
+message ListUsersRequest {
+  repeated int32 user_ids = 1;
+}
+
+message GetUserRequest {
+  int32 user_id = 1;
+}
+
+message CreateUserRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string post_code = 3;
+  string city = 4;
+  string address = 5;
+  int32  age = 6;
+}
+
+message UpdateUserRequest {
+  int32 user_id = 1;
+  optional string first_name = 2;
+  optional string last_name = 3;
+  optional string post_code = 4;
+  optional string city = 5;
+  optional string address = 6;
+  optional int32 age = 7;
+}
+
+message DeleteUserRequest {
+  int32 user_id = 1;
+}

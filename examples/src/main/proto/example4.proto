@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.exxeta.protos.example4";
+option java_outer_classname = "Example4Protos";
+
+message TextMessage {
+  string text = 1;
+}
