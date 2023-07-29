@@ -3,8 +3,6 @@
 This repository contains all relevant implementations for my bachelor
 thesis `Evaluation of gRPC APIs in Modern Microservice Architectures`.
 
-The repository is structured as follows:
-
 ## Repository Structure
 
 All projects are part of a parent-pom, meaning they can all be built at once by
